@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import SoccerBall from './SoccerBall.jpg';
+import { useState, useEffect } from 'react';
+import Data from './components/MatchesPresentation';
+
 
 function App() {
+  const [data, setData] = useState({});
+
+  const getResults = () => {
+    fetch('/data')
+      .then((res) => res.json())
+      .then((res) => setData(res))
+      .catch();
+  };
+
+  useEffect(() => {
+    getResults();
+    setInterval(() => getResults(), 600 * 1000);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <img className="Img" src={SoccerBall} alt="Soccer Ball" />
       </header>
+      <Data data={data} />
     </div>
   );
 }
+
 
 export default App;
