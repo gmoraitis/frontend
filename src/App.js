@@ -1,33 +1,31 @@
 import './App.css';
-import SoccerBall from './SoccerBall.jpg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import sportradar from './sportradar.jpg';
 import { useState, useEffect } from 'react';
-import Data from './components/MatchesPresentation';
+import MatchesPresentation from './components/MatchesPresentation';
 
 
 function App() {
-  const [data, setData] = useState({});
-
-  const getResults = () => {
-    fetch('/data')
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch();
-  };
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    getResults();
-    setInterval(() => getResults(), 600 * 1000);
-  }, []);
+    fetch('/data')
+      .then(res => res.json())
+      .then(res => setData(res))
+  }, [])
 
   return (
-    <div className="App">
+  <div className="App">
       <header>
-        <img className="Img" src={SoccerBall} alt="Soccer Ball" />
+        <img className="Img" src={sportradar} alt="Sportradar" />
       </header>
-      <Data data={data} />
+      <h3>Matches Presentation</h3>
+      {data.length &&
+        <MatchesPresentation data={data} />}
     </div>
+  
   );
 }
 
-
 export default App;
+

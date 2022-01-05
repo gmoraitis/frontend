@@ -1,8 +1,9 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  padding-top: 5%;
   color: white;
+  padding-top: 4%;
+  min-height: 100vh;
 }
 
 .App-header {
@@ -15,7 +16,7 @@
   color: white;
 }
 .Img {
-  max-width: 20%;
+  max-width: 22%;
   height: 10%; 
   display: block;
   margin-left: auto;
